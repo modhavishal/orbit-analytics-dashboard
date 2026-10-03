@@ -10,11 +10,12 @@ import { Input } from "@/components/ui/input";
 type AuthFormProps = {
   mode: "login" | "signup";
   nextPath: string;
+  initialError?: string;
 };
 
 const initialState: AuthFormState = {};
 
-export function AuthForm({ mode, nextPath }: AuthFormProps) {
+export function AuthForm({ mode, nextPath, initialError }: AuthFormProps) {
   const isSignUp = mode === "signup";
   const [state, formAction, isPending] = useActionState(
     isSignUp ? signUp : signIn,
@@ -22,13 +23,14 @@ export function AuthForm({ mode, nextPath }: AuthFormProps) {
   );
 
   useEffect(() => {
-    if (state.error) {
-      toast.error(state.error);
+    const error = state.error ?? initialError;
+    if (error) {
+      toast.error(error, { id: `auth-error-${error}` });
     }
     if (state.message) {
       toast.success(state.message);
     }
-  }, [state.error, state.message]);
+  }, [initialError, state.error, state.message]);
 
   return (
     <section className="rounded-2xl border border-border/80 bg-card p-6 shadow-xl shadow-foreground/[0.04] sm:p-8">
@@ -43,7 +45,7 @@ export function AuthForm({ mode, nextPath }: AuthFormProps) {
         </p>
       </div>
 
-      <form action={formAction} className="space-y-4">
+      <form action={formAction} className="space-y-4" noValidate>
         <input type="hidden" name="next" value={nextPath} />
         {isSignUp ? (
           <div className="space-y-2">
@@ -91,23 +93,6 @@ export function AuthForm({ mode, nextPath }: AuthFormProps) {
             className="h-10"
           />
         </div>
-
-        {state.error ? (
-          <p
-            role="alert"
-            className="rounded-lg border border-destructive/25 bg-destructive/5 px-3 py-2.5 text-sm text-destructive"
-          >
-            {state.error}
-          </p>
-        ) : null}
-        {state.message ? (
-          <p
-            role="status"
-            className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 px-3 py-2.5 text-sm text-emerald-700 dark:text-emerald-300"
-          >
-            {state.message}
-          </p>
-        ) : null}
 
         <Button className="h-10 w-full" type="submit" disabled={isPending}>
           {isPending

@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { getSafeRedirectPath } from "@/lib/auth";
+import { AUTH_UNCONFIGURED_MESSAGE, getSafeRedirectPath } from "@/lib/auth";
 import { getSupabaseConfig } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -32,10 +32,7 @@ export async function signIn(
   formData: FormData,
 ): Promise<AuthFormState> {
   if (!getSupabaseConfig()) {
-    return {
-      error:
-        "Authentication is not configured. Add your Supabase URL and publishable key to .env.local.",
-    };
+    return { error: AUTH_UNCONFIGURED_MESSAGE };
   }
 
   const parsed = credentialsSchema.safeParse({
@@ -65,10 +62,7 @@ export async function signUp(
   formData: FormData,
 ): Promise<AuthFormState> {
   if (!getSupabaseConfig()) {
-    return {
-      error:
-        "Authentication is not configured. Add your Supabase URL and publishable key to .env.local.",
-    };
+    return { error: AUTH_UNCONFIGURED_MESSAGE };
   }
 
   const parsed = signUpSchema.safeParse({

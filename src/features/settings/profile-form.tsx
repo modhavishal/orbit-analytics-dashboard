@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Bell, Check, Laptop, Moon, Palette, Sun, UserRound } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useForm, useWatch } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { saveProfile } from "@/app/(dashboard)/settings/actions";
 import { Button } from "@/components/ui/button";
@@ -52,11 +53,11 @@ export function ProfileSettings() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty, isValid, isSubmitting },
+    formState: { errors, isDirty, isSubmitting },
   } = form;
 
   const bioValue = useWatch({ control: form.control, name: "bio" }) ?? "";
-  const isSaveDisabled = !isValid || !isDirty || isSubmitting;
+  const isSaveDisabled = !isDirty || isSubmitting;
 
   const toggleNotification = (key: keyof NotificationSettings) => {
     setNotifications((current) => ({
@@ -71,7 +72,12 @@ export function ProfileSettings() {
       setSaveMessage(result.message);
       reset(values, { keepDirty: false });
     } catch {
-      setSaveMessage("Unable to save your profile right now. Please try again.");
+      toast.error("Unable to save your profile right now. Please try again.");
+    }
+  }, (formErrors) => {
+    const message = Object.values(formErrors).find((error) => error?.message)?.message;
+    if (message) {
+      toast.error(message);
     }
   });
 
@@ -133,14 +139,8 @@ export function ProfileSettings() {
                       type="text"
                       placeholder="Jane Smith"
                       aria-invalid={Boolean(errors.name)}
-                      aria-describedby={errors.name ? "name-error" : undefined}
                       {...register("name")}
                     />
-                    {errors.name ? (
-                      <p id="name-error" className="text-xs text-destructive">
-                        {errors.name.message}
-                      </p>
-                    ) : null}
                   </div>
 
                   <div className="space-y-2">
@@ -152,14 +152,8 @@ export function ProfileSettings() {
                       type="email"
                       placeholder="name@company.com"
                       aria-invalid={Boolean(errors.email)}
-                      aria-describedby={errors.email ? "email-error" : undefined}
                       {...register("email")}
                     />
-                    {errors.email ? (
-                      <p id="email-error" className="text-xs text-destructive">
-                        {errors.email.message}
-                      </p>
-                    ) : null}
                   </div>
                 </div>
 
@@ -172,14 +166,8 @@ export function ProfileSettings() {
                     type="text"
                     placeholder="Acme Inc."
                     aria-invalid={Boolean(errors.company)}
-                    aria-describedby={errors.company ? "company-error" : undefined}
                     {...register("company")}
                   />
-                  {errors.company ? (
-                    <p id="company-error" className="text-xs text-destructive">
-                      {errors.company.message}
-                    </p>
-                  ) : null}
                 </div>
 
                 <div className="space-y-2">
@@ -197,15 +185,9 @@ export function ProfileSettings() {
                     maxLength={160}
                     placeholder="Tell people a bit about your work."
                     aria-invalid={Boolean(errors.bio)}
-                    aria-describedby={errors.bio ? "bio-error" : undefined}
                     className="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40"
                     {...register("bio")}
                   />
-                  {errors.bio ? (
-                    <p id="bio-error" className="text-xs text-destructive">
-                      {errors.bio.message}
-                    </p>
-                  ) : null}
                 </div>
 
                 {saveMessage ? (
