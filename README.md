@@ -1,64 +1,51 @@
-# Orbit
+# Orbit | Analytics Dashboard
 
-Orbit is an analytics dashboard built with Next.js.
+A modern, responsive analytics dashboard built with Next.js (App Router), TypeScript, Tailwind CSS and Supabase Auth.
 
-Dashboard metrics, activity, and customer profiles shown in Orbit are mock data for demo purposes only.
+**Live demo:** https://orbit-analytics-dashboard-orpin.vercel.app
 
-## Getting Started
+**Demo login:**
+- Email: demo@example.com
+- Password: 12345678
 
-First, run the development server:
+## Screenshots
+
+<img width="1911" height="910" alt="Screenshot 2026-10-03 193719" src="https://github.com/user-attachments/assets/7c140287-c81d-437c-8007-306f6f74c3f5" />
+<img width="1901" height="907" alt="Screenshot 2026-10-03 193754" src="https://github.com/user-attachments/assets/6d2d1258-d76f-489b-93ce-5c375e00df1a" />
+<img width="1912" height="906" alt="Screenshot 2026-10-03 193738" src="https://github.com/user-attachments/assets/5c1781ed-a543-4513-8af4-928a847ce16e" />
+
+
+## Features
+
+- Supabase authentication: login, register, protected routes, logout
+- Overview with KPI cards, revenue chart, traffic chart and recent orders
+- Customers table with search, filters, sorting and pagination stored in the URL
+- Customer detail pages, orders and analytics pages
+- Settings form with React Hook Form and Zod validation
+- Light and dark themes, responsive layout
+- Loading skeletons, error and not-found pages
+
+## Tech Stack
+
+Next.js (App Router), React, TypeScript, Tailwind CSS, shadcn/ui, Recharts, TanStack Table, React Hook Form, Zod, Supabase Auth
+
+## Run locally
 
 ```bash
+git clone https://github.com/modhavishal/nextjs-dashboard.git
+cd nextjs-dashboard
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add your own Supabase URL and anon key in `.env.local`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Dashboard data is mock data. Only authentication uses a real backend (Supabase).
+- Built with the help of GitHub Copilot. I reviewed, customized and tested the code.
 
-## Supabase Authentication
+## Author
 
-Orbit uses Supabase email/password authentication. Copy `.env.example` to
-`.env.local` and set these values from **Supabase Dashboard → Project
-Settings → API**:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
-
-The legacy Supabase anon key is also accepted as
-`NEXT_PUBLIC_SUPABASE_ANON_KEY`. Never put a Supabase service-role key in a
-`NEXT_PUBLIC_` variable.
-
-In **Authentication → URL Configuration**, add
-`http://localhost:3000/auth/callback` to the allowed redirect URLs. Set
-`NEXT_PUBLIC_SITE_URL` and add the corresponding callback URL for production.
-Restart the dev server after changing environment variables. Dashboard pages
-and data API routes require a signed-in user; use `/login` to sign in or `/signup`
-to create an account. If email confirmation is enabled, follow the link sent by
-Supabase to finish registration.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built by [Vishal Modha](https://github.com/modhavishal), React, Next.js and TypeScript developer.
