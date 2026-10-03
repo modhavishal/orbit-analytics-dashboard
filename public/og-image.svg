@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Orbit dashboard preview">
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5f3ff" />
+      <stop offset="100%" stop-color="#e0e7ff" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#eef2ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="70" y="70" width="1060" height="490" rx="28" fill="url(#panel)" stroke="#dfe4ff"/>
+  <rect x="110" y="110" width="180" height="56" rx="18" fill="#4f46e5" opacity="0.12"/>
+  <rect x="110" y="190" width="230" height="140" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="370" y="190" width="230" height="140" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="630" y="190" width="230" height="140" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="890" y="190" width="200" height="140" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="110" y="360" width="980" height="150" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+  <path d="M150 278 L205 250 L260 303 L315 215 L360 241" fill="none" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M690 285 C748 245, 820 302, 860 248" fill="none" stroke="#4f46e5" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="910" cy="268" r="28" fill="#8b5cf6" opacity="0.2"/>
+  <text x="110" y="114" fill="#4f46e5" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">Orbit</text>
+  <text x="110" y="520" fill="#312e81" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">Analytics dashboard</text>
+</svg>
